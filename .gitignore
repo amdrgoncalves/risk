@@ -48,7 +48,8 @@ coverage.xml
 local_settings.py
 db.sqlite3
 
-
+# files from collectstatic
+src/static
 
 # Environments
 .env

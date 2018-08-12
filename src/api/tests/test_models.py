@@ -12,22 +12,18 @@ class RiskTest(TestCase):
 
     def test_standard_insert(self):
         #All commum inserts work as expected.
-        r = RiskField(risk=self.r, caption = 'Name', type='T')
-        r.save()
+        r = RiskField.objects.create(risk=self.r, caption = 'Name', type='T')
         self.assertEqual(r.caption, 'Name')
-        r = RiskField(risk=self.r, caption = 'BirthDate', type='D')
-        r.save()
+        r = RiskField.objects.create(risk=self.r, caption = 'BirthDate', type='D')
         self.assertEqual(r.caption, 'BirthDate')
-        r = RiskField(risk=self.r, caption = 'Age', type='N')
-        r.save()
+        r = RiskField.objects.create(risk=self.r, caption = 'Age', type='N')
         self.assertEqual(r.caption, 'Age')
-        r = RiskField(risk=self.r, caption = 'Gender', type='E',options=['M','F'])
-        r.save()
+        r = RiskField.objects.create(risk=self.r, caption = 'Gender', type='E',options=['M','F'])
         self.assertEqual(r.caption, 'Gender')
 
         #Only pre-defined choices of fields should be saved.
         with self.assertRaises(ValidationError):
-            RiskField(risk=self.r, caption = 'Gender', type='W').save()
+            RiskField.objects.create(risk=self.r, caption = 'Gender', type='W')
 
     def test_num_validation(self):
         #For type enum, we expect an options key argument.

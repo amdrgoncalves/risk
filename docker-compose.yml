@@ -13,11 +13,12 @@ services:
   web:
     build: .
     container_name: dg01
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn risk.wsgi -b 0.0.0.0:8000"
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py collectstatic --noinput && gunicorn risk.wsgi -b 0.0.0.0:8000"
     depends_on:
       - db
     volumes:
       - ./src:/src
+      - /static:/static
     expose:
       - "8000"
 

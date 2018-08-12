@@ -13,7 +13,7 @@ class RiskField(models.Model):
         ('T','TEXT'),
         ('D','DATE'),
     )
-    risk = models.ForeignKey('Risk',on_delete=models.CASCADE)
+    risk = models.ForeignKey('Risk',related_name='risk_field',on_delete=models.CASCADE)
     caption = models.CharField(max_length=30)
     type = models.CharField(max_length=1, choices=TYPE_CHOICES)
     options = ArrayField(models.CharField(max_length=20),null=True)
