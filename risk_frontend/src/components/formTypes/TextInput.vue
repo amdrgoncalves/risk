@@ -1,11 +1,10 @@
 <template>
   <div>
-    <b-form-group id="exampleInputGroup2"
-                  v-bind:label="label"
+    <b-form-group v-bind:label="label"
                   label-for="exampleInput2">
       <b-form-input id="exampleInput2"
                     type="text"
-                    v-on:input="updateText"
+                    v-on:input="update"
                     required
                     placeholder="Enter name">
       </b-form-input>
@@ -16,12 +15,13 @@
 <script>
 export default {
   name: "TextInput",
-  props: {
+  props:{
     label: String,
+    id: String
   },
   methods: {
-    updateText: function (value) {
-      this.$emit('change_value',value)
+    update: function (value) {
+      this.$emit('change_value',value,this.id)
     }
   }
 };

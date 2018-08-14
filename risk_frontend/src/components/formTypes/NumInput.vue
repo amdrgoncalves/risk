@@ -18,10 +18,11 @@ export default {
   name: "NumInput",
   props: {
     label: String,
+    id: String
   },
   methods: {
     update: function (value) {
-      this.$emit('change_value',value)
+      this.$emit('change_value',value,this.id)
     }
   }
 };
