@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <div>Risk form</div>
-
+    <h2>Risk form</h2>
     <RiskFormContainer/>
   </div>
 </template>
