@@ -2,17 +2,17 @@
   <div id="app">
     <div>Risk form</div>
 
-    <RiskForm msg='Alex'/> 
+    <RiskFormContainer/>
   </div>
 </template>
 
 <script>
-import RiskForm from "./components/RiskForm.vue";
+import RiskFormContainer from "./components/RiskFormContainer.vue";
 
 export default {
   name: "app",
   components: {
-    RiskForm
+    RiskFormContainer
   }
 };
 </script>

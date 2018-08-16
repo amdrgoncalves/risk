@@ -1,24 +1,20 @@
 <template>
   <div>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <!-- reference from https://jsfiddle.net/Herteby/utkhb79n/ -->
-      <div v-for="item, key in schema">
-        <TextInput
-          v-if="item.type == 'text' && item.options != null"
-          :id="key"
-          v-bind:label="item.caption"
-          v-on:change_value="update"
-        />
-        <TextInput
-          v-else-if="item.type == 'text'"
-          :id="key"
-          v-bind:label="item.caption"
-          v-on:change_value="update"
-        />
-        <NumInput
-          v-else-if="item.type == 'number'"
-          :id="key"
-          v-bind:label="item.caption"
+    {{this.riskFields === []}}
+    <b-form-group label="Choose risk form:"
+                  label-for="riskSelect">
+      <b-form-select id="riskSelect"
+                    :options="this.risksList"
+                    required
+                    v-on:change="getForm">
+      </b-form-select>
+    </b-form-group>
+    </b-form-select>
+    <b-form @submit="onSubmit" @reset="onReset" v-if="(this.riskFields).length > 0 ? true : false">
+      <div v-for="item in this.riskFields">
+        <Input
+          :key="item.id"
+          :item="item"
           v-on:change_value="update"
         />
 
@@ -31,84 +27,77 @@
 </template>
 
 <script>
-import TextInput from "./formTypes/TextInput.vue"
-import NumInput from "./formTypes/NumInput.vue"
+import Input from "./Input.vue"
 
-var imported_data = [
-  {
-      "type": "TEXT",
-      "caption": "Name",
-      "options": null
-  },
-  {
-      "type": "DATE",
-      "caption": "BirthDate",
-      "options": null
-  },
-  {
-      "type": "NUM",
-      "caption": "Age",
-      "options": null
-  },
-  {
-      "type": "ENUM",
-      "caption": "Gender",
-      "options": [
-          "M",
-          "F"
-      ]
-  }
+var imported_list = [
+    {
+        "id": 1,
+        "name": "Automobile"
+    },
+    {
+        "id": 2,
+        "name": "House"
+    },
+    {
+        "id": 3,
+        "name": "Prize"
+    }
 ]
 
-// Calculates initial from
-var schema = {}
-imported_data.map((obj,index)=>{
-  console.log(obj)
-  if(obj.type=="TEXT"){
-    schema[index.toString()] = {
-      type: "text",
-      caption: obj.caption
-    }
-  }else if(obj.type=="NUM"){
-    schema[index.toString()] = {
-      type: "number",
-      caption: obj.caption
-    }
-  }else if(obj.type=="ENUM"){
-    schema[index.toString()] = {
-      type: "text",
-      caption: obj.caption
-    }
-  }else if(obj.type=="DATE"){
-    schema[index.toString()] = {
-      type: "date",
-      caption: obj.caption
-    }
-  }
-})
+var options = imported_list.map((obj)=>(obj.name))
 
+
+
+var imported_data = [
+    {
+        "id": 1,
+        "type": "TEXT",
+        "caption": "Driver Name",
+        "options": null
+    },
+    {
+        "id": 2,
+        "type": "DATE",
+        "caption": "Birth Date",
+        "options": null
+    },
+    {
+        "id": 3,
+        "type": "NUM",
+        "caption": "Car Year",
+        "options": null
+    },
+    {
+        "id": 4,
+        "type": "ENUM",
+        "caption": "Gender",
+        "options": [
+            "M",
+            "F"
+        ]
+    }
+]
 
 
 export default {
   name: "RiskForm",
   props: {
-    msg: String
+    risksList: Array,
+    riskFields: Array
   },
-  components:{
-    TextInput,
-    NumInput
+  components: {
+    Input
   },
-  data () {
-    console.log(schema)
-
+  data() {
     return {
-
-      schema: schema,
+      options: options,
       formData: {},
-      show: true
-    }
+    };
   },
   methods: {
+    getForm(value) {
+      this.$emit('getFormFields',value);
+    },
     onSubmit(evt) {
       evt.preventDefault();
       alert(JSON.stringify(this.formData));
@@ -116,17 +105,14 @@ export default {
     onReset(evt) {
       evt.preventDefault();
       /* Reset our form values */
-      this.form.num = "";
-      this.form.text = "";
-      this.form.food = null;
-      this.form.checked = [];
+      this.formData = {}
       /* Trick to reset/clear native browser form validation state */
       this.show = false;
       this.$nextTick(() => {
-        this.show = true
+        this.show = true;
       });
     },
-    update(value,key){
+    update(value, key) {
       this.formData[key] = value;
     }
   }

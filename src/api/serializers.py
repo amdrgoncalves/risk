@@ -12,7 +12,7 @@ class RiskFieldSerializer(serializers.ModelSerializer):
     type = serializers.CharField(source='get_type_display')
     class Meta:
         model = RiskField
-        fields = ('type','caption','options')
+        fields = ('id','type','caption','options')
 
 class Risk1Serializer(serializers.ModelSerializer):
     risk_field = RiskFieldSerializer(many=True,read_only=True)
