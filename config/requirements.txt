@@ -3,3 +3,4 @@ psycopg2-binary==2.7.5
 gunicorn==19.6.0
 djangorestframework==3.8.2
 django-cors-headers==2.4.0
+django-test-pep8==0.1

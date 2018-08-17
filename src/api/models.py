@@ -6,20 +6,23 @@ from django.core.exceptions import ValidationError
 class Risk(models.Model):
     name = models.CharField(max_length=30)
 
+
 class RiskField(models.Model):
     TYPE_CHOICES = (
-        ('E','ENUM'),
+        ('E', 'ENUM'),
         ('N', 'NUM'),
-        ('T','TEXT'),
-        ('D','DATE'),
+        ('T', 'TEXT'),
+        ('D', 'DATE'),
     )
-    risk = models.ForeignKey('Risk',related_name='risk_field',on_delete=models.CASCADE)
+    risk = models.ForeignKey('Risk',
+                             related_name='risk_field',
+                             on_delete=models.CASCADE)
     caption = models.CharField(max_length=30)
     type = models.CharField(max_length=1, choices=TYPE_CHOICES)
-    options = ArrayField(models.CharField(max_length=20),null=True)
+    options = ArrayField(models.CharField(max_length=20), null=True)
 
     def save(self, *args, **kwargs):
-        #Custom validation
+        # Custom validation
         error1 = self.type == 'E' and not self.options
         error2 = self.type != 'E' and self.options
         error3 = self.type not in [x[0] for x in self.TYPE_CHOICES]
