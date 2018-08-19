@@ -1,9 +1,14 @@
+from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Risk
 from .serializers import RiskAllSerializer,Risk1Serializer
 
+# Entry point for vue build
+def index(request):
+    data={}
+    return render(request, 'index.html',data) # this is in templates/dist/
 
 @api_view(['GET'])
 def get_risk_type(request, pk):

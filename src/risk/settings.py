@@ -59,7 +59,7 @@ ROOT_URLCONF = 'risk.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['static/risk_frontend/dist'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

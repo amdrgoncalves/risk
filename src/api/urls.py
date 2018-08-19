@@ -4,6 +4,11 @@ from . import views
 
 urlpatterns = [
     path(
+        '',
+        views.index,
+        name='index'
+    ),
+    path(
         'api/v1/risks/<int:pk>/',
         views.get_risk_type,
         name='get_risk_type'
