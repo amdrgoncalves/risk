@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Risk
-from .serializers import RiskAllSerializer,Risk1Serializer
+from .serializers import RiskAllSerializer, Risk1Serializer
 
 # Entry point for vue build
 def index(request):
@@ -18,8 +18,9 @@ def get_risk_type(request, pk):
 
     # get details of risk
     if request.method == 'GET':
-        serializer = Risk1Serializer(risk,many=True,read_only=True)
+        serializer = Risk1Serializer(risk, many=True, read_only=True)
         return Response(serializer.data)
+
 
 @api_view(['GET'])
 def get_risks(request):
