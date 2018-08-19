@@ -10,12 +10,18 @@ from api.models import *
 
 #risk
 r = Risk.objects.create(name='Automobile')
-Risk.objects.create(name='House')
-Risk.objects.create(name='Travel')
+r2 = Risk.objects.create(name='House')
 
-#riskfields
-RiskField.objects.create(risk=r, caption = 'Name', type='T')
-RiskField.objects.create(risk=r, caption = 'BirthDate', type='D')
-RiskField.objects.create(risk=r, caption = 'Age', type='N')
+
+#riskfields automobile
+RiskField.objects.create(risk=r, caption='Name', type='T')
+RiskField.objects.create(risk=r, caption='BirthDate', type='D')
+RiskField.objects.create(risk=r, caption='Age', type='N')
 RiskField.objects.create(risk=r,
-    caption = 'Gender', type='E',options=['M','F'])
+                         caption='Gender', type='E',
+                         options=['M','F'])
+
+# riskfields house
+RiskField.objects.create(risk=r2, caption='Address', type='T')
+RiskField.objects.create(risk=r2, caption='Number of rooms', type='E',
+                            options=['1', '2', '3', '4', '5+'])
