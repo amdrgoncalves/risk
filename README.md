@@ -22,7 +22,7 @@ source venv/bin/activate
 pip install -r config/requirements.txt
 ```
 
-Frontend. Vue is working like a template for django. In deployment is served by Nginx
+Frontend. Vue is working like a template for django. In deployment is served by Nginx at collectstatic folder created by django.
 ```
 cd src/static/risk_fronted
 npm install -g @vue/cli
