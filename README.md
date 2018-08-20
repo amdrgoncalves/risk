@@ -25,9 +25,10 @@ pip install -r config/requirements.txt
 Frontend. Vue is working like a template for django. In deployment is served by Nginx at collectstatic folder created by django.
 ```
 cd src/static/risk_frontend
-npm install -g @vue/cli
+sudo npm install -g @vue/cli
 npm install
 npm run build #django serves from static/risk_frontend/dist
+npm run test:unit
 ```
 For development (localhost:8080)
 
@@ -35,10 +36,7 @@ For development (localhost:8080)
 npm run serve 
 ```
 
-Test frontend
-```
-npm run test:unit
-```
+
 ## Running
 ```
 docker-compose build
